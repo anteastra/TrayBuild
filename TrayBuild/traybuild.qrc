@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/TrayBuild"/>
+    <qresource prefix="/images">
+        <file>Resources/icon.ico</file>
+        <file>Resources/tray-icon.png</file>
+    </qresource>
+</RCC>
