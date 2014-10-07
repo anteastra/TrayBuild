@@ -15,6 +15,7 @@ TrayBuild::TrayBuild(QWidget *parent, Qt::WFlags flags)
 	ui.setupUi(this);
 
 	entityManager = new EntityManager(this);
+	entityManager->setLayout(ui.EntityVerticalLayout);
 	
 	this -> initWindow();
 	this -> setTrayIconActions();
@@ -108,6 +109,8 @@ void TrayBuild::initWindow()
 
 	ui.sourceEdit->setText(entityManager->getSettingsManager()->getSource());
 	ui.targetEdit->setText(entityManager->getSettingsManager()->getTarget());
+
+	connect(ui.pushButtonAddEntity, SIGNAL(clicked()), entityManager, SLOT(addEntity()));
 }
 
 void TrayBuild::initWorker()

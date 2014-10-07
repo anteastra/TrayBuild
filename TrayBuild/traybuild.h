@@ -16,6 +16,8 @@ public:
 	TrayBuild(QWidget *parent = 0, Qt::WFlags flags = 0);
 	~TrayBuild();
 
+	Ui::TrayBuildClass ui;
+
 protected:
 	void closeEvent(QCloseEvent *e);
 
@@ -30,7 +32,7 @@ private:
 	void initWindow();
 	void initWorker();
 
-	Ui::TrayBuildClass ui;
+	
 	QMenu *trayIconMenu;
 	QAction *minimizeAction;
 	QAction *restoreAction;

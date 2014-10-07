@@ -3,7 +3,8 @@
 EntityManager::EntityManager(QObject *parent)
 	: QObject(parent)
 {
-	SettingsManager* settingsManager = new SettingsManager(this);
+	settingsManager = new SettingsManager(this);
+	totalEntityNumber = 0;
 }
 
 EntityManager::~EntityManager()
@@ -15,4 +16,11 @@ EntityManager::~EntityManager()
 SettingsManager* EntityManager::getSettingsManager()
 {
 	return settingsManager;
+}
+
+void EntityManager::addEntity()
+{	
+	EntityWidget *widget = new EntityWidget();
+	layout->addWidget(widget);
+	totalEntityNumber++;
 }

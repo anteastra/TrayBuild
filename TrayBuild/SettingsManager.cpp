@@ -30,7 +30,7 @@ void SettingsManager::init()
 
 void SettingsManager::createSettings()
 {
-	QString input = "d:\\study\\qt\\tray-input2";
+	QString input = "d:\\study\\qt\\tray-input";
 	QString output = "d:\\study\\qt\\tray-output";
 	settings->setValue("input",input);
 	settings->setValue("output",output);
