@@ -6,7 +6,7 @@
 #include <QString>
 
 #include "ui_traybuild.h"
-#include "SettingsManager.h"
+#include "entitymanager.h"
 
 class TrayBuild : public QMainWindow
 {
@@ -36,7 +36,7 @@ private:
 	QAction *restoreAction;
 	QAction *quitAction;
 	QSystemTrayIcon *trayIcon;
-	SettingsManager *settingsManager;
+	EntityManager *entityManager;	
 };
 
 #endif // TRAYBUILD_H

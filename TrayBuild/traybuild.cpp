@@ -7,14 +7,14 @@
 #include <QThread>
 
 #include "worker.h"
+#include "SettingsManager.h"
 
 TrayBuild::TrayBuild(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
 {
 	ui.setupUi(this);
 
-	settingsManager = new SettingsManager(this);
-	settingsManager -> init();
+	entityManager = new EntityManager(this);
 	
 	this -> initWindow();
 	this -> setTrayIconActions();
@@ -26,7 +26,7 @@ TrayBuild::TrayBuild(QWidget *parent, Qt::WFlags flags)
 
 TrayBuild::~TrayBuild()
 {
-	delete settingsManager;
+	delete entityManager;
 }
 
 void TrayBuild::showTrayIcon()
@@ -106,8 +106,8 @@ void TrayBuild::initWindow()
 	QIcon *icon = new QIcon(SettingsManager::ICON_PATH);
 	this->setWindowIcon(*icon);
 
-	ui.sourceEdit->setText(settingsManager->getSource());
-	ui.targetEdit->setText(settingsManager->getTarget());
+	ui.sourceEdit->setText(entityManager->getSettingsManager()->getSource());
+	ui.targetEdit->setText(entityManager->getSettingsManager()->getTarget());
 }
 
 void TrayBuild::initWorker()
