@@ -12,5 +12,10 @@ EntityWidget::~EntityWidget()
 
 }
 
+void EntityWidget::on_pushButtonDelete_clicked()
+{
+	emit remove(id);
+}
+
 
 

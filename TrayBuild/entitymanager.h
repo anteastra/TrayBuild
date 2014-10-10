@@ -25,10 +25,16 @@ public:
 	public slots:
 	void addEntity();
 
+public slots:
+	void removeEntity(int id);
+
 private:
+
+	int getNextId();
+
 	SettingsManager *settingsManager;
-	int totalEntityNumber;
-	QList<EntityWidget> entities;
+	int maxEntityNumber;
+	QList<EntityWidget*> entities;
 	QLayout *layout;
 
 

@@ -13,11 +13,19 @@ public:
 	~EntityWidget();
 
 	int getId() const { return id; }
-	void setId(int val) { id = val; }
+	void setId(int val) { id = val;	ui.lineEditName->setPlaceholderText(QString ("Id: %1 (Enter name here)").arg(id)); }
+
+
+private slots:
+	void on_pushButtonDelete_clicked();
 
 private:
 	Ui::EntityWidget ui;
 	int id;	
+
+signals:
+	void remove(int id);
+
 };
 
 #endif // ENTITYWIDGET_H
