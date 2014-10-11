@@ -6,14 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>475</width>
-    <height>41</height>
+    <width>603</width>
+    <height>25</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>EntityWidget</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>1</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>1</number>
+   </property>
    <item>
     <widget class="QPushButton" name="pushButtonDelete">
      <property name="text">
@@ -32,9 +44,30 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="lineEditRegexp">
      <property name="placeholderText">
       <string>place regexp here</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="lineEditLocation">
+     <property name="placeholderText">
+      <string>location</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButtonApply">
+     <property name="text">
+      <string>apply</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>download now</string>
      </property>
     </widget>
    </item>
@@ -42,20 +75,6 @@
     <widget class="QPushButton" name="pushButton_3">
      <property name="text">
       <string>start</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="pushButton_2">
-     <property name="text">
-      <string>restart</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string>stop</string>
      </property>
     </widget>
    </item>

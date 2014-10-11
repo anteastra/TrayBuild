@@ -18,19 +18,22 @@ public:
 	EntityManager(QObject *parent);
 	~EntityManager();
 
-	SettingsManager* getSettingsManager();	
+	SettingsManager* getSettingsManager();
 	QLayout * getLayout() const { return layout; }
 	void setLayout(QLayout * val) { layout = val; }
 
-	public slots:
-	void addEntity();
+	void restoreState();
 
 public slots:
+	void addEntity();
+	void addEntity(EntityWidget* widget);
 	void removeEntity(int id);
+	void saveEntity(int id);	
 
 private:
 
 	int getNextId();
+	EntityWidget* findWidgetByID(int id);
 
 	SettingsManager *settingsManager;
 	int maxEntityNumber;

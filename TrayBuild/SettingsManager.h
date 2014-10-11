@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QSettings>
 
+#include "entitywidget.h"
+
 class SettingsManager : public QObject
 {
 	Q_OBJECT 
@@ -15,9 +17,22 @@ public:
 	static const QString APP_NAME;
 	static const QString ORG_NAME;
 	static const QString ICON_PATH;
+
+	static const int MAX_ENTITIES;
+
+	bool isExist(int id);
 		
 	QString getSource();
+	void setSource(QString & value);
 	QString getTarget();
+	void setTarget(QString & value);
+	QString getCount();
+	void setCount(int value);
+
+public slots:
+	void saveEntityState(EntityWidget* widget);
+	void removeEntityState(EntityWidget* widget);
+	void restoreEntityState(EntityWidget* widget, int id);
 
 private:
 	QSettings *settings;
