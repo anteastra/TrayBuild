@@ -20,6 +20,11 @@ void EntityWidget::on_pushButtonDelete_clicked()
 	emit remove(id);
 }
 
+void EntityWidget::on_pushButtonDownload_clicked()
+{
+	emit download(id);
+}
+
 void EntityWidget::on_lineEditName_textChanged(const QString & text)
 {
 	name = text;

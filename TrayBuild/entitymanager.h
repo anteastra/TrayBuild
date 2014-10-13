@@ -28,15 +28,18 @@ public slots:
 	void addEntity();
 	void addEntity(EntityWidget* widget);
 	void removeEntity(int id);
-	void saveEntity(int id);	
+	void saveEntity(int id);
+	void downloadEntity(int id);
+
+signals:
+	void downloadByRegexp(QString source, QString destination, QString regexp);
 
 private:
 
 	int getNextId();
 	EntityWidget* findWidgetByID(int id);
-
-	SettingsManager *settingsManager;
 	int maxEntityNumber;
+	SettingsManager *settingsManager;
 	QList<EntityWidget*> entities;
 	QLayout *layout;
 

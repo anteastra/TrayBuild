@@ -7,6 +7,7 @@
 
 #include "ui_traybuild.h"
 #include "entitymanager.h"
+#include "downloadmanager.h"
 
 class TrayBuild : public QMainWindow
 {
@@ -38,7 +39,8 @@ private:
 	QAction *restoreAction;
 	QAction *quitAction;
 	QSystemTrayIcon *trayIcon;
-	EntityManager *entityManager;	
+	EntityManager *entityManager;
+	DownloadManager *downloadManager;
 };
 
 #endif // TRAYBUILD_H

@@ -5,25 +5,33 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QThread>
+#include <QTextBrowser>
 
 #include "worker.h"
 #include "SettingsManager.h"
+#include "logger.h"
 
 TrayBuild::TrayBuild(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
 {
 	ui.setupUi(this);
 
+	Logger::logBrowser = ui.textBrowser;
+
+	downloadManager = new DownloadManager(this);
+
 	entityManager = new EntityManager(this);
 	entityManager->setLayout(ui.EntityLayout);
 	entityManager->restoreState();
-	
+
+	connect(entityManager, SIGNAL(downloadByRegexp(QString, QString, QString)), downloadManager, SLOT(downloadByRegexp(QString, QString, QString)));
+		
 	this -> initWindow();
 	this -> setTrayIconActions();
 	this -> showTrayIcon();
 	this -> hide();
 
-	this -> initWorker();
+	Logger::message("Loading complete");
 }
 
 TrayBuild::~TrayBuild()
@@ -33,22 +41,18 @@ TrayBuild::~TrayBuild()
 
 void TrayBuild::showTrayIcon()
 {
-	// Создаём экземпляр класса и задаём его свойства...
 	trayIcon = new QSystemTrayIcon(this);
 	QIcon trayImage(SettingsManager::ICON_PATH);
 	trayIcon -> setIcon(trayImage);
 	trayIcon -> setContextMenu(trayIconMenu);
 
-	// Подключаем обработчик клика по иконке...
 	connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
 
-	// Выводим значок...
 	trayIcon -> show();
 }
 
 void TrayBuild::trayActionExecute()
 {
-	//QMessageBox::information(this, "TrayIcon", "Тестовое сообщение. Замените вызов этого сообщения своим кодом.");
 	showNormal();
 }
 
@@ -67,17 +71,14 @@ void TrayBuild::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 
 void TrayBuild::setTrayIconActions()
 {
-	// Setting actions...
 	minimizeAction = new QAction("Minimize", this);
 	restoreAction = new QAction("Show", this);
 	quitAction = new QAction("Exit", this);
 
-	// Connecting actions to slots...
 	connect (minimizeAction, SIGNAL(triggered()), this, SLOT(hide()));
 	connect (restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
 	connect (quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
 
-	// Setting system tray's icon menu...
 	trayIconMenu = new QMenu(this);
 	trayIconMenu -> addAction (minimizeAction);
 	trayIconMenu -> addAction (restoreAction);
@@ -99,8 +100,8 @@ void TrayBuild::changeEvent(QEvent *event)
 void TrayBuild::closeEvent(QCloseEvent *e)
 {
 	//TODO: uncomment later
-	//this -> hide();
-	//e -> ignore();
+	this -> hide();
+	e -> ignore();
 }
 
 void TrayBuild::initWindow()
@@ -111,10 +112,4 @@ void TrayBuild::initWindow()
 	ui.targetEdit->setText(entityManager->getSettingsManager()->getTarget());
 
 	connect(ui.pushButtonAddEntity, SIGNAL(clicked()), entityManager, SLOT(addEntity()));	
-}
-
-void TrayBuild::initWorker()
-{
-	QThread* thread = new QThread;
-	Worker* worker = new Worker();
 }

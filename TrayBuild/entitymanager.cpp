@@ -1,5 +1,8 @@
 #include "entitymanager.h"
 
+#include <QDir>
+#include "logger.h"
+
 EntityManager::EntityManager(QObject *parent)
 	: QObject(parent)
 {
@@ -30,6 +33,7 @@ void EntityManager::addEntity(EntityWidget* widget)
 {	
 	connect(widget, SIGNAL(remove(int)), this, SLOT(removeEntity(int)));
 	connect(widget, SIGNAL(save(int)), this, SLOT(saveEntity(int)));
+	connect(widget, SIGNAL(download(int)), this, SLOT(downloadEntity(int)));
 	entities.append(widget);
 	layout->addWidget(widget);
 
@@ -61,6 +65,13 @@ void EntityManager::saveEntity(int id)
 {
 	EntityWidget* widget = findWidgetByID(id);
 	settingsManager->saveEntityState(widget);	
+}
+
+void EntityManager::downloadEntity(int id)
+{
+	EntityWidget* widget = findWidgetByID(id);
+	Logger::message(QString("project '" + widget->getName() + "' is checking for new file"));
+	emit downloadByRegexp(widget->getLocation(), QString(getSettingsManager()->getTarget() + QDir::separator() + widget->getName()), widget->getRegexp());
 }
 
 int EntityManager::getNextId()

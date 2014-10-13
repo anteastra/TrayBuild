@@ -26,6 +26,7 @@ public:
 private slots:
 	void on_pushButtonDelete_clicked();
 	void on_pushButtonApply_clicked();
+	void on_pushButtonDownload_clicked();
 	void on_lineEditName_textChanged(const QString & value);
 	void on_lineEditRegexp_textChanged(const QString & value);
 	void on_lineEditLocation_textChanged(const QString & value);
@@ -40,6 +41,7 @@ private:
 signals:
 	void remove(int id);
 	void save(int id);
+	void download(int id);
 
 };
 
