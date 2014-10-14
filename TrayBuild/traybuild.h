@@ -28,6 +28,7 @@ private slots:
 	void trayActionExecute();
 	void setTrayIconActions();
 	void showTrayIcon();
+	void on_targetEdit_textChanged(const QString & value);
 
 private:
 	void initWindow();

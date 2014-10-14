@@ -22,10 +22,8 @@ public:
 
 	bool isExist(int id);
 		
-	QString getSource();
-	void setSource(QString & value);
 	QString getTarget();
-	void setTarget(QString & value);
+	void setTarget(const QString & value);
 	QString getCount();
 	void setCount(int value);
 
@@ -36,8 +34,6 @@ public slots:
 
 private:
 	QSettings *settings;
-	void init();
-	void createSettings();
 
 };
 

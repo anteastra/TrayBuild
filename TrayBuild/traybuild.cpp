@@ -113,3 +113,8 @@ void TrayBuild::initWindow()
 
 	connect(ui.pushButtonAddEntity, SIGNAL(clicked()), entityManager, SLOT(addEntity()));	
 }
+
+void TrayBuild::on_targetEdit_textChanged(const QString & text)
+{	
+	entityManager->getSettingsManager()->setTarget(text);
+}

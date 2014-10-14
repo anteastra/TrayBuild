@@ -14,29 +14,12 @@ const int SettingsManager::MAX_ENTITIES = 5;
 SettingsManager::SettingsManager(QObject *parent)
 	: QObject(parent)
 {
-	settings = new QSettings(SettingsManager::ORG_NAME, SettingsManager::APP_NAME);	
-	init();
+	settings = new QSettings(SettingsManager::ORG_NAME, SettingsManager::APP_NAME);
 }
 
 SettingsManager::~SettingsManager()
 {
 	delete settings;
-}
-
-void SettingsManager::init()
-{	
-	if (!settings->childGroups().contains("input")) {
-		createSettings();		
-	}
-}
-
-void SettingsManager::createSettings()
-{
-	QString input = "d:\\study\\qt\\tray-input";
-	QString output = "d:\\study\\qt\\tray-output";
-	settings->setValue("input",input);
-	settings->setValue("output",output);
-	settings->sync();
 }
 
 bool SettingsManager::isExist(int id)
@@ -45,22 +28,12 @@ bool SettingsManager::isExist(int id)
 	return settings->contains(key);
 }
 
-QString SettingsManager::getSource()
-{	
-	return settings->value("input").toString();
-}
-
-void SettingsManager::setSource(QString & value)
-{
-	settings->setValue("input",value);
-}
-
 QString SettingsManager::getTarget()
 {
 	return settings->value("output").toString();
 }
 
-void SettingsManager::setTarget(QString & value)
+void SettingsManager::setTarget(const QString & value)
 {
 	settings->setValue("output",value);
 }
